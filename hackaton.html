@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play and Stop Melody with Tone.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/tone@14.8.33/build/Tone.js"></script>
+</head>
+<body>
+
+    <button id="playButton">Play Melody</button>
+    <button id="stopButton">Stop Melody</button>
+
+    <script>
+
+//create a synth and connect it to the main output (your speakers)
+const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+const now = Tone.now();
+var chord1 = ["G4", "B4b"];
+var chord2 = ["F4", "A4"];
+var chord3 = ["D4", "G4"];
+
+// const melody = [["G4", "B4b"],["G4", "B4b"],["F4", "A4"],["F4", "A4"],["D4", "G4"],["D4", "G4"],["D4", "G4"] ];
+
+//play a chord for the duration of an 8th note
+synth.triggerAttackRelease(chord1, "8n", now);
+synth.triggerAttackRelease(chord1, "8n", now + 0.25);
+synth.triggerAttackRelease(chord2, "8n", now + 0.5);
+synth.triggerAttackRelease(chord2, "8n", now + 0.75);
+synth.triggerAttackRelease(chord3, "8n", now + 1);
+synth.triggerAttackRelease(chord3, "8n", now + 1.25);
+synth.triggerAttackRelease(chord3, "8n", now + 1.5);
+
+        // Add event listener to play button
+        document.getElementById("playButton").addEventListener("click", () => {
+            Tone.Transport.start("+0.5");
+        });
+
+        // Add event listener to stop button
+        document.getElementById("stopButton").addEventListener("click", () => {
+            Tone.Transport.stop(); // Stops the transport
+        });
+    </script>
+
+</body>
+</html>
